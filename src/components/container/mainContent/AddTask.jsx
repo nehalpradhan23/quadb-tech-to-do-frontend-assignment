@@ -9,14 +9,20 @@ const AddTask = () => {
   return (
     // <div className="flex h-[178px] bg-gradient-to-b">
     <div className="flex h-[178px] relative">
-      <div className="absolute h-full w-full opacity-10 bg-gradient-to-b to-[rgb(53,121,55)] from-[rgb(208,255,210)]"></div>
+      <div
+        className={`absolute h-full w-full ${
+          theme === "dark"
+            ? "bg-[#2F3630]"
+            : "opacity-10 bg-gradient-to-b to-[#357937] from-[#d0ffd2]"
+        }`}
+      ></div>
       {/* ================ */}
       <div className="w-full text-black flex px-5 py-5 z-10">
         <div className="flex flex-1 flex-col">
           <input
             className={`w-[74px] h-[20px] font-[400] leading-5 text-[15px] bg-transparent flex-1 outline-none ${
               theme === "dark"
-                ? "placeholder-[#F5F5F5]"
+                ? "placeholder-[#F5F5F5] text-white"
                 : "placeholder-[#1B281B]"
             }`}
             placeholder="Add A Task"

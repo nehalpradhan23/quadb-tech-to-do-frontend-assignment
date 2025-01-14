@@ -25,3 +25,20 @@ body {
     text-wrap: balance;
   }
 } */
+
+@layer base {
+  body {
+    @apply dark:bg-[#242424];
+  }
+}
+
+/* body {
+  background-color: #242424;
+} */
+
+/* [dark-theme="dark"] body {
+  background-color: red;
+}
+[dark-theme="light"] body {
+  background-color: red;
+} */
