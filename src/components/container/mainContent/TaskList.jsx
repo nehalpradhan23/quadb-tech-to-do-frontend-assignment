@@ -38,6 +38,7 @@ const TaskList = () => {
           {/* star button =============================== */}
           {theme === "dark" ? (
             <Image
+              alt=""
               src="/tasks/starWhite.png"
               className="cursor-pointer"
               height={24}
@@ -45,6 +46,7 @@ const TaskList = () => {
             />
           ) : (
             <Image
+              alt=""
               src="/tasks/starBlack.png"
               className="cursor-pointer"
               height={24}

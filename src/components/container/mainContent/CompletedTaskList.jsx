@@ -22,12 +22,14 @@ const CompletedTaskList = () => {
               <div className="p-[11px] h-10 w-10 flex items-center justify-center">
                 {/* <input type="checkbox" className="" name="" id="" /> */}
                 <Image
+                  alt=""
                   src="/tasks/greenbox.png"
                   className="cursor-pointer relative"
                   height={24}
                   width={24}
                 />
                 <Image
+                  alt=""
                   src="/tasks/check.png"
                   className="cursor-pointer absolute"
                   height={24}
@@ -41,6 +43,7 @@ const CompletedTaskList = () => {
             {/* star button =============================== */}
             {theme === "dark" ? (
               <Image
+                alt=""
                 src="/tasks/starWhite.png"
                 className="cursor-pointer"
                 height={24}
@@ -48,6 +51,7 @@ const CompletedTaskList = () => {
               />
             ) : (
               <Image
+                alt=""
                 src="/tasks/starBlack.png"
                 className="cursor-pointer"
                 height={24}

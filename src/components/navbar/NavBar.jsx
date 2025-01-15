@@ -3,16 +3,19 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import React from "react";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { useDispatch } from "react-redux";
+import { toggleSidebar } from "@/redux/slices/sidebar/sidebarSlice.js";
 
 const NavBar = () => {
-  const { theme, setTheme } = useTheme();
-  console.log(theme);
+  const { theme } = useTheme();
+  // console.log(theme);
+  const dispatch = useDispatch();
 
   return (
     <div className="flex justify-between py-3 dark:bg-[#242424] bg-[#FBFDFC]">
       {/* left  */}
       <div className="flex items-center gap-4">
-        <button className="">
+        <button className="" onClick={() => dispatch(toggleSidebar())}>
           {theme === "dark" ? (
             <Image
               alt=""
@@ -32,7 +35,7 @@ const NavBar = () => {
           )}
         </button>
         <div className="flex items-center gap-2">
-          <Image src={"/navbar/logo.png"} width={32} height={32} />
+          <Image alt="" src={"/navbar/logo.png"} width={32} height={32} />
           <span className="font-bold text-2xl text-[#3F9142]">DoIt</span>
         </div>
       </div>
