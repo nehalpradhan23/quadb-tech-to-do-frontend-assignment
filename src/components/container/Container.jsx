@@ -2,13 +2,15 @@ import React from "react";
 import Sidebar from "./sidebar/Sidebar";
 import MainContent from "./mainContent/MainContent";
 import { useSelector } from "react-redux";
+import EditContainer from "./editContainer/EditContainer";
 
 const Container = () => {
-  const isOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+  const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
   return (
     <div className="h-screen pt-5 flex">
-      {isOpen && <Sidebar />}
+      {isSidebarOpen && <Sidebar />}
       <MainContent />
+      <EditContainer />
     </div>
   );
 };
