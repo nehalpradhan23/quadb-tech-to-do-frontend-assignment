@@ -1,9 +1,33 @@
+import { toggleEditContainer } from "@/redux/slices/editContainer/editContainerSlice";
+import { removeTodo } from "@/redux/slices/todos/todoSlice";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const EditContainer = () => {
   const { theme } = useTheme();
+  const dispatch = useDispatch();
+  const viewTodo = useSelector((state) => state.editTodo);
+
+  // const isContainerOpen = useSelector(
+  //   (state) => state.editContainer.isSidebarOpen
+  // );
+
+  const handleContainerClose = () => {
+    // console.log("close");
+    // if (isContainerOpen) {
+    //   return;
+    // }
+    dispatch(toggleEditContainer(false));
+  };
+
+  const handleDeleteTodo = (todo) => {
+    // console.log(todo);
+    dispatch(removeTodo(todo.id));
+    dispatch(toggleEditContainer(false));
+  };
+  // =================================================================================
   return (
     <div
       className={`w-[452px] h-[964px] ${
@@ -27,8 +51,24 @@ const EditContainer = () => {
                 <div className="flex w-[365px] h-[48px] items-center">
                   <div className="w-[48px] h-[48px] p-1 flex items-center justify-center">
                     {theme === "dark" ? (
+                      viewTodo?.completed ? (
+                        <Image
+                          src="/editTask/1/checkboxGreen.png"
+                          height={48}
+                          width={48}
+                          alt=""
+                        />
+                      ) : (
+                        <Image
+                          src="/editTask/1/checkboxEmptyWhite.png"
+                          height={24}
+                          width={24}
+                          alt=""
+                        />
+                      )
+                    ) : viewTodo?.completed ? (
                       <Image
-                        src="/editTask/1/checkboxEmptyWhite.png"
+                        src="/editTask/1/checkboxGreen.png"
                         height={24}
                         width={24}
                         alt=""
@@ -42,16 +82,34 @@ const EditContainer = () => {
                       />
                     )}
                   </div>
+                  {/* ============================================ */}
                   <span
                     className={`w-[90px] h-5 font-normal leading-5 text-[15px]`}
                   >
-                    name
+                    {viewTodo?.text}
                   </span>
                 </div>
+                {/* star =========================== */}
                 <div className="">
                   {theme === "dark" ? (
+                    viewTodo?.isStarred ? (
+                      <Image
+                        src="/editTask/1/starFillWhite.png"
+                        height={24}
+                        width={24}
+                        alt=""
+                      />
+                    ) : (
+                      <Image
+                        src="/editTask/1/starWhite.png"
+                        height={24}
+                        width={24}
+                        alt=""
+                      />
+                    )
+                  ) : viewTodo?.isStarred ? (
                     <Image
-                      src="/editTask/1/starWhite.png"
+                      src="/editTask/1/starFillBlack.png"
                       height={24}
                       width={24}
                       alt=""
@@ -203,13 +261,13 @@ const EditContainer = () => {
         </div>
         {/* close and delete ====================== */}
         <div
-          className={`w-[452px] h-[69px] py-[42px] px-[13px] justify-end border-t flex items-center mb-12 ${
+          className={`w-[452px] h-[69px] py-[42px] px-[13px] justify-end border-t flex items-center mb-24 ${
             theme === "dark" ? "border-t-[#357937]/60" : ""
           }`}
         >
           <div className="flex justify-between items-center w-full">
             {/* close btn --------- */}
-            <div className="">
+            <div className="" onClick={handleContainerClose}>
               {theme === "dark" ? (
                 <Image
                   alt=""
@@ -228,8 +286,8 @@ const EditContainer = () => {
             </div>
             {/* ----------------------- */}
             <span>Created Today</span>
-            {/* ------------------------------------ */}
-            <div className="">
+            {/* delete task ------------------------------------ */}
+            <div className="" onClick={() => handleDeleteTodo(viewTodo)}>
               {theme === "dark" ? (
                 <Image
                   alt=""

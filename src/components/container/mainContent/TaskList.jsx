@@ -1,5 +1,7 @@
 "use client";
 
+import { addTodoToView } from "@/redux/slices/editContainer/editContainerContentSlice";
+import { toggleEditContainer } from "@/redux/slices/editContainer/editContainerSlice";
 import {
   toggleTodoComplete,
   toggleTodoStarred,
@@ -12,12 +14,27 @@ const data = ["data", "data", "data", "data"];
 const TaskList = () => {
   const { theme } = useTheme();
   const dispatch = useDispatch();
+
   const listStyle = useSelector((state) => state.listStyle.listStyle);
+  const isContainerOpen = useSelector(
+    (state) => state.editContainer.isSidebarOpen
+  );
 
   const todoList = useSelector((state) => state.todos.list);
-  console.log(todoList);
+  const todos = useSelector((state) => state.todos.list);
+
+  // console.log(todoList);
   const completedTodos = todoList.filter((todo) => !todo.completed);
-  console.log("not completed", completedTodos);
+
+  const handleTaskClick = (item) => {
+    // console.log("item", item);
+    if (isContainerOpen) {
+      dispatch(addTodoToView(item));
+      return;
+    }
+    dispatch(toggleEditContainer());
+    dispatch(addTodoToView(item));
+  };
 
   // ========================================================
   return (
@@ -26,6 +43,7 @@ const TaskList = () => {
         <>
           {completedTodos?.map((item) => (
             <div
+              onClick={() => handleTaskClick(item)}
               key={item?.id}
               className={`h-[80px] py-4 flex items-center justify-between border-t-[1.5px] pr-8 ${
                 theme === "dark" ? "border-white/20" : ""
@@ -33,7 +51,10 @@ const TaskList = () => {
             >
               <div className="w-[365px] h-12 flex items-center">
                 <div
-                  onClick={() => dispatch(toggleTodoComplete(item.id))}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(toggleTodoComplete(item.id));
+                  }}
                   className="p-[11px] h-10 w-10 flex items-center justify-center cursor-pointer"
                 >
                   {/* <input type="checkbox" className="" name="" id="" /> */}
@@ -59,7 +80,10 @@ const TaskList = () => {
               {/* star button =============================== */}
               <div
                 className=""
-                onClick={() => dispatch(toggleTodoStarred(item?.id))}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch(toggleTodoStarred(item?.id));
+                }}
               >
                 {theme === "dark" ? (
                   item?.isStarred ? (
@@ -106,13 +130,17 @@ const TaskList = () => {
           {/* <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-4"> */}
           {completedTodos?.map((item) => (
             <div
+              onClick={() => handleTaskClick(item)}
               key={item.id}
               className={`h-[147px] w-[320px] py-4 flex items-center justify-between border-[1.5px] pr-8 border-[#496e4b]/20`}
             >
               <div className="w-[365px] h-12 flex items-center">
                 <div
                   className="p-[11px] h-10 w-10 flex items-center justify-center cursor-pointer"
-                  onClick={() => dispatch(toggleTodoComplete(item.id))}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(toggleTodoComplete(item.id));
+                  }}
                 >
                   {/* <input type="checkbox" className="" name="" id="" /> */}
                   {theme === "dark" ? (
@@ -136,7 +164,10 @@ const TaskList = () => {
               {/* star button =============================== */}
               <div
                 className=""
-                onClick={() => dispatch(toggleTodoStarred(item?.id))}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch(toggleTodoStarred(item?.id));
+                }}
               >
                 {theme === "dark" ? (
                   item?.isStarred ? (

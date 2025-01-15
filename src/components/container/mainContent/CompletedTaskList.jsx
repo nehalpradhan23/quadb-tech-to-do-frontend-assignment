@@ -1,5 +1,7 @@
 "use client";
 
+import { addTodoToView } from "@/redux/slices/editContainer/editContainerContentSlice";
+import { toggleEditContainer } from "@/redux/slices/editContainer/editContainerSlice";
 import {
   toggleTodoComplete,
   toggleTodoStarred,
@@ -14,6 +16,20 @@ const CompletedTaskList = () => {
   const todoList = useSelector((state) => state.todos.list);
   const dispatch = useDispatch();
   const completedTodos = todoList.filter((todo) => todo.completed);
+  const isContainerOpen = useSelector(
+    (state) => state.editContainer.isSidebarOpen
+  );
+
+  const handleTaskClick = (item) => {
+    // console.log("item", item);
+    if (isContainerOpen) {
+      dispatch(addTodoToView(item));
+      return;
+    }
+    dispatch(toggleEditContainer());
+    dispatch(addTodoToView(item));
+  };
+
   // =======================================================
   return (
     <div className="py-[25px]">
@@ -23,6 +39,7 @@ const CompletedTaskList = () => {
       <div className="py-[25px]">
         {completedTodos.map((item) => (
           <div
+            onClick={() => handleTaskClick(item)}
             key={item.id}
             className={`h-[80px] py-4 flex items-center justify-between border-t-[1.5px] pr-8 ${
               theme === "dark" ? "border-white/20" : ""
