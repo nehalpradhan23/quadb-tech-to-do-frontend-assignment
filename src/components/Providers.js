@@ -16,7 +16,9 @@ const Providers = ({ children }) => {
   }
   return (
     // <Provider store={store}>
-    <ThemeProvider attribute="class">{children}</ThemeProvider>
+    <ThemeProvider attribute="class" defaultTheme="dark">
+      {children}
+    </ThemeProvider>
     // </Provider>
   );
 };

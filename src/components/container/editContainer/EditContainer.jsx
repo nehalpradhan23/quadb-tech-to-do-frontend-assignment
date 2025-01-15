@@ -136,14 +136,14 @@ const EditContainer = () => {
                   <div className="w-[48px] h-[48px] p-1 flex items-center justify-center">
                     {theme === "dark" ? (
                       <Image
-                        src="/tasks/2/plusWhite.png"
+                        src="/editTask/2/plusWhite.png"
                         height={24}
                         width={24}
                         alt=""
                       />
                     ) : (
                       <Image
-                        src="/tasks/2/plusBlack.png"
+                        src="/editTask/2/plusBlack.png"
                         height={24}
                         width={24}
                         alt=""

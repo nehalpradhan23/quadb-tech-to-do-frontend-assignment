@@ -48,7 +48,10 @@ const CompletedTaskList = () => {
             <div className="w-[365px] h-12 flex items-center">
               <div
                 className="p-[11px] h-10 w-10 flex items-center justify-center"
-                onClick={() => dispatch(toggleTodoComplete(item.id))}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch(toggleTodoComplete(item.id));
+                }}
               >
                 {/* <input type="checkbox" className="" name="" id="" /> */}
                 <Image
@@ -73,7 +76,10 @@ const CompletedTaskList = () => {
             {/* star button =============================== */}
             <div
               className=""
-              onClick={() => dispatch(toggleTodoStarred(item?.id))}
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(toggleTodoStarred(item?.id));
+              }}
             >
               {theme === "dark" ? (
                 item?.isStarred ? (

@@ -3,34 +3,40 @@ import { createSlice } from "@reduxjs/toolkit";
 export const todoSlice = createSlice({
   name: "todos",
   initialState: {
-    list: [], // Array to store all to-dos
+    list: [],
+    // list: JSON.parse(localStorage.getItem("myTodos")) || [],
   },
   reducers: {
+    setTodos: (state, action) => {
+      state.list = action.payload;
+    },
     addTodo: (state, action) => {
-      state.list.push(action.payload); // Add a new to-do
+      state.list.push(action.payload);
+      // localStorage.setItem("myTodos", JSON.stringify(state.list));
     },
     removeTodo: (state, action) => {
-      state.list = state.list.filter((todo) => todo.id !== action.payload); // Remove by ID
+      state.list = state.list.filter((todo) => todo.id !== action.payload);
+      // localStorage.setItem("myTodos", JSON.stringify(state.list));
     },
     toggleTodoComplete: (state, action) => {
       const todo = state.list.find((todo) => todo.id === action.payload);
       if (todo) {
-        todo.completed = !todo.completed; // Toggle completion status
+        todo.completed = !todo.completed;
+        // localStorage.setItem("myTodos", JSON.stringify(state.list));
       }
     },
     toggleTodoStarred: (state, action) => {
       const todo = state.list.find((todo) => todo.id === action.payload);
       if (todo) {
-        todo.isStarred = !todo.isStarred; // Toggle completion status
+        todo.isStarred = !todo.isStarred;
+        // localStorage.setItem("myTodos", JSON.stringify(state.list));
       }
-    },
-    clearTodos: (state) => {
-      state.list = []; // Clear all to-dos
     },
   },
 });
 
 export const {
+  setTodos,
   addTodo,
   removeTodo,
   toggleTodoComplete,
