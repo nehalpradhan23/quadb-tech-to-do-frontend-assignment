@@ -7,7 +7,7 @@ import EditContainer from "./editContainer/EditContainer";
 const Container = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
   return (
-    <div className="h-screen pt-5 flex">
+    <div className="h-screen pt-5 mx-auto flex gap-[6px]">
       {isSidebarOpen && <Sidebar />}
       <MainContent />
       <EditContainer />

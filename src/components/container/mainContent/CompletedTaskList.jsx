@@ -7,7 +7,7 @@ const data = ["data", "data", "data", "data"];
 const CompletedTaskList = () => {
   const { theme } = useTheme();
   return (
-    <div>
+    <div className="py-[25px]">
       <span className="h-[20px] font-[400px] text-[15px] leading-5">
         Completed
       </span>

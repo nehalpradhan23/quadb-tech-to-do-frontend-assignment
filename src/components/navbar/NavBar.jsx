@@ -3,13 +3,15 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import React from "react";
 import ThemeSwitcher from "./ThemeSwitcher";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "@/redux/slices/sidebar/sidebarSlice.js";
+import { toggleListStyle } from "@/redux/slices/listStyle/listStyleSlice";
 
 const NavBar = () => {
   const { theme } = useTheme();
   // console.log(theme);
   const dispatch = useDispatch();
+  const listStyle = useSelector((state) => state.listStyle.listStyle);
 
   return (
     <div className="flex justify-between py-3 dark:bg-[#242424] bg-[#FBFDFC]">
@@ -60,11 +62,30 @@ const NavBar = () => {
             />
           )}
         </button>
-        <button className="">
+        {/* list style ===================================== */}
+        <button className="" onClick={() => dispatch(toggleListStyle())}>
           {theme === "dark" ? (
+            listStyle === "list" ? (
+              <Image
+                alt=""
+                src={"/navbar/appGridWhite.png"}
+                className=""
+                width={18}
+                height={18}
+              />
+            ) : (
+              <Image
+                alt=""
+                src={"/navbar/appListWhite.png"}
+                className=""
+                width={18}
+                height={18}
+              />
+            )
+          ) : listStyle === "list" ? (
             <Image
               alt=""
-              src={"/navbar/appGridWhite.png"}
+              src={"/navbar/appGridBlack.png"}
               className=""
               width={18}
               height={18}
@@ -72,7 +93,7 @@ const NavBar = () => {
           ) : (
             <Image
               alt=""
-              src={"/navbar/appGridBlack.png"}
+              src={"/navbar/appListBlack.png"}
               className=""
               width={18}
               height={18}

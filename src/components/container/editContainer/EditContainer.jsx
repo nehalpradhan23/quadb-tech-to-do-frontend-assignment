@@ -7,7 +7,7 @@ const EditContainer = () => {
   return (
     <div
       className={`w-[452px] h-[964px] ${
-        theme === "dark" ? "" : "bg-[#eef6ef]"
+        theme === "dark" ? "bg-[#2c2c2c]" : "bg-[#eef6ef]"
       }`}
     >
       <div className="flex flex-col h-full">
