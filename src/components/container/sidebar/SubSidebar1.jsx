@@ -39,8 +39,11 @@ const SubSidebar1 = () => {
         theme === "dark" ? "bg-[#232323]" : "bg-[#fbfdfc]"
       }`}
     >
-      {data.map((item) => (
-        <div className="w-[240px] h-10 rounded-lg px-4 py-2 gap-4 flex items-center">
+      {data.map((item, index) => (
+        <div
+          key={index}
+          className="w-[240px] h-10 rounded-lg px-4 py-2 gap-4 flex items-center"
+        >
           {theme === "dark" ? (
             <Image src={item.imageSrcWhite} width={24} height={24} alt="" />
           ) : (

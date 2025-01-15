@@ -211,16 +211,40 @@ const EditContainer = () => {
             {/* close btn --------- */}
             <div className="">
               {theme === "dark" ? (
-                <Image src="/editTask/crossWhite.png" height={14} width={15} />
+                <Image
+                  alt=""
+                  src="/editTask/crossWhite.png"
+                  height={14}
+                  width={15}
+                />
               ) : (
-                <Image src="/editTask/crossWhite.png" height={14} width={15} />
+                <Image
+                  alt=""
+                  src="/editTask/crossBlack.png"
+                  height={14}
+                  width={15}
+                />
               )}
             </div>
             {/* ----------------------- */}
             <span>Created Today</span>
             {/* ------------------------------------ */}
             <div className="">
-              <Image src="/editTask/deleteWhite.png" width={23} height={26} />
+              {theme === "dark" ? (
+                <Image
+                  alt=""
+                  src="/editTask/deleteWhite.png"
+                  width={23}
+                  height={26}
+                />
+              ) : (
+                <Image
+                  alt=""
+                  src="/editTask/deleteBlack.png"
+                  width={23}
+                  height={26}
+                />
+              )}
             </div>
           </div>
         </div>

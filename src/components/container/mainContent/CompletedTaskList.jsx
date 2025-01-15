@@ -1,25 +1,38 @@
 "use client";
 
+import {
+  toggleTodoComplete,
+  toggleTodoStarred,
+} from "@/redux/slices/todos/todoSlice";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
 
 const data = ["data", "data", "data", "data"];
 const CompletedTaskList = () => {
   const { theme } = useTheme();
+  const todoList = useSelector((state) => state.todos.list);
+  const dispatch = useDispatch();
+  const completedTodos = todoList.filter((todo) => todo.completed);
+  // =======================================================
   return (
     <div className="py-[25px]">
       <span className="h-[20px] font-[400px] text-[15px] leading-5">
         Completed
       </span>
       <div className="py-[25px]">
-        {data.map((item) => (
+        {completedTodos.map((item) => (
           <div
+            key={item.id}
             className={`h-[80px] py-4 flex items-center justify-between border-t-[1.5px] pr-8 ${
               theme === "dark" ? "border-white/20" : ""
             }`}
           >
             <div className="w-[365px] h-12 flex items-center">
-              <div className="p-[11px] h-10 w-10 flex items-center justify-center">
+              <div
+                className="p-[11px] h-10 w-10 flex items-center justify-center"
+                onClick={() => dispatch(toggleTodoComplete(item.id))}
+              >
                 {/* <input type="checkbox" className="" name="" id="" /> */}
                 <Image
                   alt=""
@@ -37,27 +50,50 @@ const CompletedTaskList = () => {
                 />
               </div>
               <span className="line-through text-[15px] leading-5 font-[400px]">
-                {item}
+                {item.text}
               </span>
             </div>
             {/* star button =============================== */}
-            {theme === "dark" ? (
-              <Image
-                alt=""
-                src="/tasks/starWhite.png"
-                className="cursor-pointer"
-                height={24}
-                width={24}
-              />
-            ) : (
-              <Image
-                alt=""
-                src="/tasks/starBlack.png"
-                className="cursor-pointer"
-                height={24}
-                width={24}
-              />
-            )}
+            <div
+              className=""
+              onClick={() => dispatch(toggleTodoStarred(item?.id))}
+            >
+              {theme === "dark" ? (
+                item?.isStarred ? (
+                  <Image
+                    alt=""
+                    src="/tasks/starFillWhite.png"
+                    className="cursor-pointer"
+                    height={24}
+                    width={24}
+                  />
+                ) : (
+                  <Image
+                    alt=""
+                    src="/tasks/starWhite.png"
+                    className="cursor-pointer"
+                    height={24}
+                    width={24}
+                  />
+                )
+              ) : item?.isStarred ? (
+                <Image
+                  alt=""
+                  src="/tasks/starFillBlack.png"
+                  className="cursor-pointer"
+                  height={24}
+                  width={24}
+                />
+              ) : (
+                <Image
+                  alt=""
+                  src="/tasks/starBlack.png"
+                  className="cursor-pointer"
+                  height={24}
+                  width={24}
+                />
+              )}
+            </div>
           </div>
         ))}
       </div>
